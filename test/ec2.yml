@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  tasks:
+   - name: install ec2
+     ec2:
+      key_name: awskey
+      instance_type: t2.micro
+      image: ami-1ee65166
+      region: us-west-2
+      group: web

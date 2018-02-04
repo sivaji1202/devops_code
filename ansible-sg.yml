@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  tasks:
+   - name: create sg
+     ec2_group:
+      name: ansible-sg
+      description: demo sg
+      region: us-west-2
+      rules:
+         - proto: tcp
+           from_port: 80
+           to_port: 80
+           cidr_ip: 0.0.0.0/0
+         - proto: tcp
+           from_port: 22 
+           to_port: 22
+           cidr_ip: 0.0.0.0/0
+   - name: install ec2
+     ec2:
+      key_name: awskey
+      instance_type: t2.micro
+      image: ami-1ee65166
+      region: us-west-2
+      group: ansible-sg
